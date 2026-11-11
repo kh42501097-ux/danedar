@@ -1,0 +1,552 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Danedar Tea</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: dark green hero band with a steaming cup, light sections for teas, gallery, brew steps and a WhatsApp order form. */
+:root{
+  --bg:#f2f5ee; --surface:#ffffff; --fg:#15261b; --muted:#4d5f52; --line:#d5dfcd;
+  --leaf:#2f6b3f; --accent:#c2761b; --accent-ink:#8a4d08;
+  --hero-bg:#0f2c1b; --hero-fg:#f1f6ea; --hero-muted:#b9cdb9;
+  --wa:#25d366; --wa-ink:#052e14;
+  --display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1810; --surface:#15271b; --fg:#eef3e8; --muted:#a6b8a9; --line:#26402f;
+    --leaf:#6fb27f; --accent:#e29a3a; --accent-ink:#f0b565;
+    --hero-bg:#123522; --hero-fg:#f1f6ea; --hero-muted:#b9cdb9;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1810; --surface:#15271b; --fg:#eef3e8; --muted:#a6b8a9; --line:#26402f;
+  --leaf:#6fb27f; --accent:#e29a3a; --accent-ink:#f0b565;
+  --hero-bg:#123522; --hero-fg:#f1f6ea; --hero-muted:#b9cdb9;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:48px;height:48px;flex:none}
+.brand b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:800;line-height:1;letter-spacing:.01em}
+.brand small{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.nav{display:flex;align-items:center;gap:22px}
+.nav a.link{text-decoration:none;font-weight:500;color:var(--muted)}
+.nav a.link:hover{color:var(--fg)}
+@media (max-width:760px){.nav a.link{display:none}}
+
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1.3rem;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;font-size:1rem;line-height:1.2}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-wa{background:var(--wa);color:var(--wa-ink)}
+.btn-wa:hover{filter:brightness(1.06)}
+.btn-ghost{border-color:currentColor;background:transparent;color:inherit}
+.btn-sm{padding:.6rem 1.05rem;font-size:.95rem}
+
+/* hero */
+.hero{background:var(--hero-bg);color:var(--hero-fg)}
+.hero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding-block:56px 64px}
+.hero .eyebrow{color:#f0b565}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.5rem);font-weight:800;margin:14px 0 18px}
+.hero h1 em{font-style:normal;color:#f0b565}
+.hero p.lead{font-size:1.15rem;color:var(--hero-muted);max-width:34em}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-note{display:flex;gap:14px;align-items:flex-start;margin-top:34px;padding-top:22px;border-top:1px solid rgba(241,246,234,.18);max-width:34em;color:var(--hero-muted);font-size:.98rem}
+.hero-note strong{color:var(--hero-fg)}
+.hero-art{min-width:0}
+.hero-art svg{width:100%;height:auto;display:block;max-width:480px;margin:0 auto}
+.steam path{opacity:.6}
+@media (prefers-reduced-motion:no-preference){
+  .steam path{animation:rise 4.5s ease-in-out infinite}
+  .steam path:nth-child(2){animation-delay:-1.5s}
+  .steam path:nth-child(3){animation-delay:-3s}
+  @keyframes rise{0%,100%{transform:translateY(0);opacity:.35}50%{transform:translateY(-8px);opacity:.75}}
+}
+@media (max-width:820px){.hero-in{grid-template-columns:1fr;padding-block:40px 48px}.hero-art{order:-1}.hero-art svg{max-width:320px}}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:28px;padding-block:44px;border-bottom:1px solid var(--line)}
+.features h3{font-size:1.15rem;margin-bottom:6px}
+.features p{color:var(--muted);font-size:.98rem}
+.features .eyebrow{display:block;margin-bottom:8px}
+
+/* sections */
+.sec{padding-block:72px}
+.sec-head{display:grid;gap:10px;margin-bottom:34px;max-width:40em}
+.sec-head h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800}
+.sec-head p{color:var(--muted)}
+
+/* products */
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card .pic{background:var(--pic);padding:22px 0 0}
+.card .pic svg{display:block;width:62%;max-width:210px;height:auto;margin:0 auto}
+.card .body{display:grid;gap:10px;padding:22px;flex:1;align-content:start}
+.card h3{font-size:1.4rem}
+.card .tag{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.card p{color:var(--muted);font-size:.98rem}
+.card .btn{justify-self:start;margin-top:6px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px}
+.gallery figure{margin:0;min-width:0}
+.gallery svg{display:block;width:100%;height:auto;border-radius:16px}
+.gallery figcaption{margin-top:10px;font-size:.95rem;color:var(--muted)}
+
+/* brew */
+.brew{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:26px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:2.8rem;line-height:1;color:var(--accent)}
+.steps h3{font-size:1.15rem}
+.steps p{color:var(--muted);font-size:.98rem}
+
+/* order */
+.order{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start}
+@media (max-width:860px){.order{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;min-width:0}
+.panel h3{font-size:1.35rem;margin-bottom:16px}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-size:.88rem;font-weight:700}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;padding:.7rem .85rem;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+.field textarea{resize:vertical;min-height:84px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+.preview{margin:4px 0 18px;padding:14px;border-radius:12px;background:var(--bg);border:1px dashed var(--line);font-size:.92rem;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.preview b{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:6px}
+.contact-list{display:grid;gap:18px}
+.contact-item{display:grid;gap:6px}
+.contact-item .lab{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.contact-item .val{font-family:var(--display);font-weight:700;font-size:1.3rem;overflow-wrap:anywhere;user-select:all}
+.contact-item .acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.copy{font:inherit;font-size:.88rem;font-weight:700;padding:.4rem .85rem;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+.status{font-size:.85rem;color:var(--leaf);min-height:1.2em}
+
+/* footer */
+.foot{background:var(--hero-bg);color:var(--hero-muted);padding-block:34px 96px;font-size:.95rem}
+.foot-in{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:space-between}
+.foot .brand b{color:var(--hero-fg)}
+.foot .brand small{color:var(--hero-muted)}
+
+/* floating whatsapp */
+.fab{position:fixed;z-index:25;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:50%;background:var(--wa);color:var(--wa-ink);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+.fab svg{width:32px;height:32px}
+@media (prefers-reduced-motion:no-preference){
+  .fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--wa);animation:ping 2.4s ease-out infinite}
+  @keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#123222"/>
+      <circle cx="32" cy="32" r="27" fill="none" stroke="#d98a2b" stroke-width="2"/>
+      <path d="M32 11 C47 17 49 34 32 46 C15 34 17 17 32 11Z" fill="#8fc16a"/>
+      <path d="M32 15 L32 42" stroke="#123222" stroke-width="2" stroke-linecap="round"/>
+      <path d="M32 26 L39 21 M32 33 L40 28 M32 26 L25 21 M32 33 L24 28" stroke="#123222" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="23" cy="53" r="2.6" fill="#d98a2b"/><circle cx="32" cy="55" r="2.6" fill="#d98a2b"/><circle cx="41" cy="53" r="2.6" fill="#d98a2b"/>
+    </symbol>
+    <symbol id="wa" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M8.5 7.5c-.4.7-.3 1.7.6 3.1.9 1.5 2.1 2.6 3.6 3.2 1 .4 1.7.2 2.1-.4l.3-.7-1.9-1-.7.6c-.7-.3-1.6-1.2-2-2l.6-.7-.9-1.9z" fill="currentColor"/>
+    </symbol>
+    <symbol id="cup" viewBox="0 0 200 170">
+      <ellipse cx="100" cy="153" rx="96" ry="14" fill="#dfe8d8"/>
+      <ellipse cx="100" cy="150" rx="66" ry="9" fill="#c9d6c0"/>
+      <path d="M30 40 H170 C170 112 150 150 100 150 C50 150 30 112 30 40Z" fill="#f7f9f4"/>
+      <path d="M170 62 C210 60 210 116 162 112" fill="none" stroke="#f7f9f4" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="100" cy="40" rx="70" ry="12" fill="#e7ede1"/>
+      <ellipse cx="100" cy="42" rx="62" ry="9" fill="#a85a16"/>
+      <ellipse cx="94" cy="40" rx="40" ry="4" fill="#cf7d26"/>
+      <path d="M48 70 C50 100 62 128 84 140" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Danedar Tea home">
+      <svg aria-hidden="true"><use href="#logo"/></svg>
+      <span><b>Danedar</b><small>Tea</small></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="link" href="#teas">Our teas</a>
+      <a class="link" href="#gallery">Gallery</a>
+      <a class="link" href="#brew">How to brew</a>
+      <a class="link" href="#order">Order</a>
+      <a class="btn btn-wa btn-sm" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar chai ke baare mein maloomat chahiye.">
+        <svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <span class="eyebrow">Danedar &middot; <span lang="ur">دانے دار</span> granular tea</span>
+        <h1>Har dane mein <em>rang</em> aur dum.</h1>
+        <p class="lead">Danedar is a strong, granulated tea made for a deep colour and a kadak cup. Brew it once and you will taste why the dane matters.</p>
+        <div class="cta-row">
+          <a class="btn btn-wa" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar chai order karni hai.">
+            <svg aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#teas">See our teas</a>
+        </div>
+        <div class="hero-note">
+          <p><strong>Why granules?</strong> Each tiny dane is rolled tight, so it opens slowly in the pot and gives a strong, even colour from the first cup to the last.</p>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 420 400" role="img" aria-label="A steaming cup of Danedar tea with tea granules around the saucer">
+          <circle cx="210" cy="250" r="150" fill="#17432a"/>
+          <circle cx="210" cy="250" r="184" fill="none" stroke="#d98a2b" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.1 13" opacity=".7"/>
+          <g class="steam" fill="none" stroke="#f1f6ea" stroke-width="7" stroke-linecap="round">
+            <path d="M165 178 C140 148 190 128 165 98 C150 78 170 62 165 44"/>
+            <path d="M212 170 C187 140 237 120 212 90 C197 70 217 54 212 36"/>
+            <path d="M259 178 C234 148 284 128 259 98 C244 78 264 62 259 44"/>
+          </g>
+          <use href="#cup" x="60" y="130" width="300" height="255"/>
+          <g fill="#5a3218">
+            <circle cx="52" cy="372" r="5"/><circle cx="74" cy="386" r="4"/><circle cx="98" cy="378" r="3"/>
+            <circle cx="322" cy="380" r="4"/><circle cx="346" cy="370" r="5"/><circle cx="372" cy="384" r="3.5"/>
+          </g>
+          <g fill="#3b2111">
+            <circle cx="62" cy="388" r="3"/><circle cx="336" cy="390" r="3"/><circle cx="360" cy="378" r="2.6"/><circle cx="86" cy="392" r="2.6"/>
+          </g>
+          <path d="M44 120 C20 96 30 64 60 54 C74 84 66 108 44 120Z" fill="#8fc16a"/>
+          <path d="M382 140 C404 118 396 90 368 80 C354 104 360 128 382 140Z" fill="#6fae58"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="features">
+      <div><span class="eyebrow">Colour</span><h3>Deep amber in the cup</h3><p>Dense granules release their colour steadily, so your chai looks as good as it tastes.</p></div>
+      <div><span class="eyebrow">Taste</span><h3>Strong, kadak, full</h3><p>Made for dudh patti and daily chai that has to hold up against milk and sugar.</p></div>
+      <div><span class="eyebrow">Ordering</span><h3>Direct on WhatsApp</h3><p>Choose your tea, send one message and we reply with details. No account, no checkout.</p></div>
+    </div>
+  </div>
+
+  <section class="sec" id="teas">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Our teas</span>
+        <h2>Pick your Danedar</h2>
+        <p>Three blends for three kinds of tea drinker. Message us for pack sizes and prices.</p>
+      </div>
+      <div class="products">
+        <article class="card">
+          <div class="pic" style="--pic:#e4ecd9">
+            <svg viewBox="0 0 200 250" role="img" aria-label="Danedar Classic tea pack">
+              <path d="M30 24 L170 24 L176 236 Q100 246 24 236 Z" fill="#7a2a14"/>
+              <path d="M30 24 L170 24 L171 40 L29 40Z" fill="#5c1d0c"/>
+              <path d="M36 30 H164" stroke="#a24a2c" stroke-width="2" stroke-dasharray="3 5"/>
+              <rect x="44" y="70" width="112" height="132" rx="8" fill="#f7f9f4"/>
+              <circle cx="100" cy="106" r="22" fill="#123222"/>
+              <path d="M100 90 C110 95 111 108 100 118 C89 108 90 95 100 90Z" fill="#8fc16a"/>
+              <text x="100" y="152" text-anchor="middle" font-family="Bricolage Grotesque, Trebuchet MS, sans-serif" font-weight="800" font-size="21" fill="#123222">DANEDAR</text>
+              <text x="100" y="172" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="#7a2a14">CLASSIC</text>
+              <circle cx="82" cy="188" r="2.5" fill="#c2761b"/><circle cx="100" cy="190" r="2.5" fill="#c2761b"/><circle cx="118" cy="188" r="2.5" fill="#c2761b"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Everyday chai</span>
+            <h3>Danedar Classic</h3>
+            <p>A balanced, strong granulated tea for the daily family pot. Good colour, steady flavour.</p>
+            <a class="btn btn-wa btn-sm" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar Classic chai order karni hai."><svg aria-hidden="true"><use href="#wa"/></svg>Order Classic</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="pic" style="--pic:#f1e2c6">
+            <svg viewBox="0 0 200 250" role="img" aria-label="Danedar Kadak tea pack">
+              <path d="M30 24 L170 24 L176 236 Q100 246 24 236 Z" fill="#a85a16"/>
+              <path d="M30 24 L170 24 L171 40 L29 40Z" fill="#82420c"/>
+              <path d="M36 30 H164" stroke="#d98a2b" stroke-width="2" stroke-dasharray="3 5"/>
+              <rect x="44" y="70" width="112" height="132" rx="8" fill="#f7f9f4"/>
+              <circle cx="100" cy="106" r="22" fill="#123222"/>
+              <path d="M100 90 C110 95 111 108 100 118 C89 108 90 95 100 90Z" fill="#8fc16a"/>
+              <text x="100" y="152" text-anchor="middle" font-family="Bricolage Grotesque, Trebuchet MS, sans-serif" font-weight="800" font-size="21" fill="#123222">DANEDAR</text>
+              <text x="100" y="172" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="#a85a16">KADAK</text>
+              <circle cx="82" cy="188" r="2.5" fill="#c2761b"/><circle cx="100" cy="190" r="2.5" fill="#c2761b"/><circle cx="118" cy="188" r="2.5" fill="#c2761b"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Extra strong</span>
+            <h3>Danedar Kadak</h3>
+            <p>Our boldest blend, made for dudh patti and for anyone who likes chai dark and strong.</p>
+            <a class="btn btn-wa btn-sm" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar Kadak chai order karni hai."><svg aria-hidden="true"><use href="#wa"/></svg>Order Kadak</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="pic" style="--pic:#dbeacf">
+            <svg viewBox="0 0 200 250" role="img" aria-label="Danedar Green tea pack">
+              <path d="M30 24 L170 24 L176 236 Q100 246 24 236 Z" fill="#2f6b3f"/>
+              <path d="M30 24 L170 24 L171 40 L29 40Z" fill="#1f4d2c"/>
+              <path d="M36 30 H164" stroke="#8fc16a" stroke-width="2" stroke-dasharray="3 5"/>
+              <rect x="44" y="70" width="112" height="132" rx="8" fill="#f7f9f4"/>
+              <circle cx="100" cy="106" r="22" fill="#123222"/>
+              <path d="M100 90 C110 95 111 108 100 118 C89 108 90 95 100 90Z" fill="#8fc16a"/>
+              <text x="100" y="152" text-anchor="middle" font-family="Bricolage Grotesque, Trebuchet MS, sans-serif" font-weight="800" font-size="21" fill="#123222">DANEDAR</text>
+              <text x="100" y="172" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="#2f6b3f">GREEN</text>
+              <circle cx="82" cy="188" r="2.5" fill="#c2761b"/><circle cx="100" cy="190" r="2.5" fill="#c2761b"/><circle cx="118" cy="188" r="2.5" fill="#c2761b"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Light and fresh</span>
+            <h3>Danedar Green</h3>
+            <p>A gentle green tea for the afternoon or after a heavy meal. Light colour, clean finish.</p>
+            <a class="btn btn-wa btn-sm" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar Green tea order karni hai."><svg aria-hidden="true"><use href="#wa"/></svg>Order Green</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="gallery" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Gallery</span>
+        <h2>From the garden to your cup</h2>
+      </div>
+      <div class="gallery">
+        <figure>
+          <svg viewBox="0 0 400 300" role="img" aria-label="Tea garden hills at sunrise">
+            <rect width="400" height="300" fill="#f4dca8"/>
+            <circle cx="292" cy="96" r="40" fill="#e9a23b"/>
+            <path d="M0 170 Q90 110 190 150 T400 140 V300 H0Z" fill="#8fbb78"/>
+            <path d="M0 205 Q120 150 230 190 T400 180 V300 H0Z" fill="#4f8f4f"/>
+            <path d="M0 250 Q140 200 260 240 T400 230 V300 H0Z" fill="#2f6b3f"/>
+            <g fill="none" stroke="#a6d38f" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 8">
+              <path d="M0 232 Q140 190 260 226 T400 214"/>
+              <path d="M0 246 Q140 206 260 240 T400 228"/>
+              <path d="M0 262 Q140 224 260 254 T400 244"/>
+              <path d="M0 278 Q140 242 260 268 T400 260"/>
+            </g>
+          </svg>
+          <figcaption>Tea rows on a hillside at sunrise</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 400 300" role="img" aria-label="A bowl heaped with dark tea granules">
+            <rect width="400" height="300" fill="#e4ecd9"/>
+            <ellipse cx="200" cy="262" rx="150" ry="16" fill="#c9d6c0"/>
+            <g id="granules"></g>
+            <path d="M80 190 H320 C314 252 266 272 200 272 C134 272 86 252 80 190Z" fill="#123222"/>
+            <ellipse cx="200" cy="190" rx="120" ry="12" fill="#1f4d2c"/>
+            <path d="M104 210 C110 238 136 252 170 256" fill="none" stroke="#3d7a4d" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <figcaption>Danedar granules, close up</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 400 300" role="img" aria-label="Two cups of hot chai side by side">
+            <rect width="400" height="300" fill="#1d3a29"/>
+            <circle cx="200" cy="150" r="118" fill="none" stroke="#d98a2b" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1 12" opacity=".6"/>
+            <g class="steam" fill="none" stroke="#f1f6ea" stroke-width="5" stroke-linecap="round">
+              <path d="M128 92 C112 72 144 60 128 40"/>
+              <path d="M262 82 C246 62 278 50 262 30"/>
+            </g>
+            <use href="#cup" x="46" y="100" width="190" height="162"/>
+            <use href="#cup" x="190" y="90" width="170" height="145"/>
+          </svg>
+          <figcaption>A pot poured, two cups ready</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 400 300" role="img" aria-label="A fresh tea bud with two leaves">
+            <rect width="400" height="300" fill="#2f6b3f"/>
+            <circle cx="200" cy="170" r="120" fill="#3a7b4b"/>
+            <path d="M200 262 C118 232 106 150 168 100 C210 150 232 210 200 262Z" fill="#8fc16a"/>
+            <path d="M200 262 C282 232 294 160 238 108 C190 160 170 212 200 262Z" fill="#6fae58"/>
+            <path d="M200 266 C184 208 190 146 200 66 C212 146 216 208 200 266Z" fill="#b7de8a"/>
+            <path d="M200 266 L200 100" stroke="#2f6b3f" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M200 232 L158 168 M200 232 L246 176" stroke="#2f6b3f" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <figcaption>Fresh leaf and bud, where it begins</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec brew" id="brew">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">How to brew</span>
+        <h2>The kadak chai method</h2>
+        <p>A simple stovetop method for one strong cup. Scale it up for the family pot.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Boil the water</h3><p>Bring one cup of water to a rolling boil in a small pot.</p></li>
+        <li><h3>Add Danedar</h3><p>Add one teaspoon of Danedar per cup and let it simmer for two to three minutes until the colour turns deep amber.</p></li>
+        <li><h3>Pour in the milk</h3><p>Add half a cup of milk and your sugar. Bring it back to the boil and let it rise once.</p></li>
+        <li><h3>Strain and serve</h3><p>Strain into your cup and serve hot. Adjust the tea and milk next time to suit your taste.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="order">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Order</span>
+        <h2>Order Danedar on WhatsApp</h2>
+        <p>Fill in the details and tap the green button. WhatsApp opens with your message ready. You can also write to us directly using the contact details.</p>
+      </div>
+      <div class="order">
+        <form class="panel" id="order-form" novalidate>
+          <h3>Your order</h3>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" type="text" autocomplete="name" placeholder="e.g. Ahmed Khan">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="f-prod">Tea</label>
+              <select id="f-prod">
+                <option>Danedar Classic</option>
+                <option>Danedar Kadak</option>
+                <option>Danedar Green</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-qty">Quantity</label>
+              <select id="f-qty">
+                <option>1 pack</option>
+                <option>2 packs</option>
+                <option>3 packs</option>
+                <option>5 packs</option>
+                <option>10 packs</option>
+                <option>Bulk order for my shop</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-addr">City and delivery address</label>
+            <textarea id="f-addr" autocomplete="street-address" placeholder="House, street, area, city"></textarea>
+          </div>
+          <div class="preview" aria-live="polite"><b>Message preview</b><span id="preview"></span></div>
+          <a class="btn btn-wa" id="send-wa" href="https://wa.me/923122847113" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Send order on WhatsApp</a>
+        </form>
+
+        <div class="panel">
+          <h3>Talk to us</h3>
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="lab">WhatsApp</span>
+              <span class="val" id="v-phone">0312 2847113</span>
+              <div class="acts">
+                <a class="btn btn-wa btn-sm" href="https://wa.me/923122847113" target="_blank" rel="noopener" data-wa="Assalam o Alaikum! Mujhe Danedar chai ke baare mein maloomat chahiye."><svg aria-hidden="true"><use href="#wa"/></svg>Chat now</a>
+                <button class="copy" type="button" data-copy="0312 2847113" data-target="v-phone">Copy number</button>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="lab">Email</span>
+              <span class="val" id="v-mail">kh42501097@gmail.com</span>
+              <div class="acts">
+                <a class="btn btn-ghost btn-sm" href="mailto:kh42501097@gmail.com?subject=Danedar%20Tea%20enquiry">Email us</a>
+                <button class="copy" type="button" data-copy="kh42501097@gmail.com" data-target="v-mail">Copy email</button>
+              </div>
+            </div>
+            <p class="status" id="status" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#top" aria-label="Danedar Tea home">
+      <svg aria-hidden="true"><use href="#logo"/></svg>
+      <span><b>Danedar</b><small>Tea</small></span>
+    </a>
+    <span>WhatsApp 0312 2847113 &middot; kh42501097@gmail.com</span>
+    <span>&copy; 2026 Danedar Tea</span>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/923122847113" target="_blank" rel="noopener" aria-label="Chat with Danedar on WhatsApp" data-wa="Assalam o Alaikum! Mujhe Danedar chai ke baare mein maloomat chahiye.">
+  <svg aria-hidden="true"><use href="#wa"/></svg>
+</a>
+
+<script>
+(function(){
+  var NUM = '923122847113';
+  function wa(text){ return 'https://wa.me/' + NUM + '?text=' + encodeURIComponent(text); }
+
+  // Preset WhatsApp messages on buttons
+  document.querySelectorAll('[data-wa]').forEach(function(a){ a.href = wa(a.getAttribute('data-wa')); });
+
+  // Order form builds the WhatsApp message live
+  var name = document.getElementById('f-name'), prod = document.getElementById('f-prod'),
+      qty = document.getElementById('f-qty'), addr = document.getElementById('f-addr'),
+      prev = document.getElementById('preview'), send = document.getElementById('send-wa'),
+      form = document.getElementById('order-form');
+  function build(){
+    var lines = ['Assalam o Alaikum! Mujhe Danedar chai order karni hai.',
+      'Tea: ' + prod.value, 'Quantity: ' + qty.value];
+    if (name.value.trim()) lines.push('Naam: ' + name.value.trim());
+    if (addr.value.trim()) lines.push('Address: ' + addr.value.trim());
+    var msg = lines.join('\n');
+    prev.textContent = msg;
+    send.href = wa(msg);
+  }
+  [name, prod, qty, addr].forEach(function(el){ el.addEventListener('input', build); el.addEventListener('change', build); });
+  form.addEventListener('submit', function(e){ e.preventDefault(); });
+  build();
+
+  // Copy buttons with a select-text fallback
+  var status = document.getElementById('status');
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy'), target = document.getElementById(btn.getAttribute('data-target'));
+      function fallback(){
+        try {
+          var r = document.createRange(); r.selectNodeContents(target);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        } catch(e) {}
+        status.textContent = 'Selected. Press copy on your device.';
+      }
+      try {
+        navigator.clipboard.writeText(text).then(function(){ status.textContent = 'Copied: ' + text; }, fallback);
+      } catch(e) { fallback(); }
+    });
+  });
+
+  // Tea granules for the bowl illustration (seeded, so it looks the same every time)
+  var g = document.getElementById('granules');
+  if (g) {
+    var seed = 7;
+    function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    var cols = ['#2b1a10','#3b2111','#54301a','#6b3b1c','#7b4a22'], out = '';
+    for (var i = 0; i < 230; i++) {
+      var x = 90 + rnd() * 220, t = (x - 200) / 112;
+      var h = 100 * (1 - t * t);
+      if (h < 6) continue;
+      var y = 196 - rnd() * h, r = 3 + rnd() * 3.4;
+      out += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(1) + '" fill="' + cols[Math.floor(rnd() * cols.length)] + '"/>';
+    }
+    for (var j = 0; j < 9; j++) {
+      var lx = 40 + rnd() * 320, ly = 272 + rnd() * 18;
+      out += '<circle cx="' + lx.toFixed(1) + '" cy="' + ly.toFixed(1) + '" r="' + (2.5 + rnd() * 2).toFixed(1) + '" fill="' + cols[Math.floor(rnd() * cols.length)] + '"/>';
+    }
+    g.innerHTML = out;
+  }
+})();
+</script>
+
+</body></html>
